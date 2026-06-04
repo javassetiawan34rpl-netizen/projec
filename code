@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexaTech Surabaya – WiFi · CCTV · Server</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d14;
+  --paper: #f5f3ee;
+  --cream: #ede9e0;
+  --red: #d93025;
+  --red-dark: #a82019;
+  --red-glow: rgba(217,48,37,0.15);
+  --gold: #c8922a;
+  --muted: #7a7870;
+  --border: rgba(13,13,20,0.12);
+  --card: #ffffff;
+  --radius: 4px;
+  --radius-lg: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ====== NOISE TEXTURE OVERLAY ====== */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+/* ====== HEADER ====== */
+header {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.1rem;
+  color: #fff; letter-spacing: -0.5px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.logo-dot {
+  width: 28px; height: 28px;
+  background: var(--red);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+
+.header-tag {
+  font-size: 0.72rem; color: rgba(255,255,255,0.4);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif; font-weight: 300;
+}
+
+.header-wa {
+  background: #25d366; color: white;
+  border: none; border-radius: var(--radius);
+  padding: 7px 14px; font-size: 0.78rem; font-weight: 500;
+  cursor: pointer; letter-spacing: 0.3px; text-decoration: none;
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity 0.2s;
+}
+.header-wa:hover { opacity: 0.85; }
+
+/* ====== HERO ====== */
+.hero {
+  position: relative; overflow: hidden;
+  background: var(--ink);
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+}
+
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(217,48,37,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217,48,37,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hero-glow {
+  position: absolute; top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(217,48,37,0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(217,48,37,0.15);
+  border: 1px solid rgba(217,48,37,0.3);
+  color: #ff6b5b; border-radius: 20px;
+  padding: 5px 14px; font-size: 0.72rem;
+  font-weight: 500; letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  border-radius: 50%; background: #ff6b5b;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  color: white;
+  line-height: 1.1; letter-spacing: -1px;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span { color: var(--red); }
+
+.hero-sub {
+  color: rgba(255,255,255,0.5);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  max-width: 440px; margin: 0 auto 2.5rem;
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ====== LAYANAN PILLS ====== */
+.layanan-pills {
+  display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 3rem; position: relative; z-index: 1;
+}
+
+.pill {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  border-radius: 40px;
+  padding: 0.65rem 1.3rem;
+  font-size: 0.85rem; font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.22s ease;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.pill:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.25);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.pill.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+  box-shadow: 0 4px 20px rgba(217,48,37,0.35);
+  transform: translateY(-2px);
+}
+
+/* ====== MAIN CONTENT ====== */
+.main {
+  position: relative; z-index: 1;
+  max-width: 1000px; margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ====== STEP BAR ====== */
+.stepbar {
+  display: flex; align-items: center;
+  margin-bottom: 2.5rem;
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.stepbar-item {
+  flex: 1; padding: 0.9rem 1rem;
+  text-align: center;
+  font-size: 0.78rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+  letter-spacing: 0.3px;
+  transition: all 0.3s;
+}
+
+.stepbar-item:last-child { border-right: none; }
+
+.stepbar-item.done {
+  background: var(--red); color: white;
+}
+
+.stepbar-item.active {
+  background: var(--ink); color: white;
+}
+
+.step-num {
+  display: block;
+  font-size: 1rem; font-weight: 800;
+  margin-bottom: 2px;
+}
+
+/* ====== LAYOUT DESKTOP / MOBILE ====== */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 1.5fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ====== FORM CARD ====== */
+.form-panel {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: none;
+}
+
+.form-panel.show { display: block; }
+
+.form-header {
+  background: var(--ink); color: white;
+  padding: 1.2rem 1.5rem;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.form-header-icon {
+  width: 36px; height: 36px; border-radius: 6px;
+  background: var(--red); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+
+.form-header h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+}
+
+.form-header p {
+  font-size: 0.75rem; opacity: 0.5; margin-top: 1px;
+}
+
+.form-body { padding: 1.5rem; }
+
+/* ====== FORM FIELDS ====== */
+.frow {
+  display: grid; gap: 0.9rem; margin-bottom: 0.9rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 560px) {
+  .frow { grid-template-columns: 1fr; }
+}
+
+.frow.single { grid-template-columns: 1fr; }
+
+.fg { display: flex; flex-direction: column; gap: 5px; }
+
+.fg label {
+  font-size: 0.75rem; font-weight: 600;
+  color: var(--muted); letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.fg label .req { color: var(--red); }
+
+.fg input, .fg select, .fg textarea {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem 0.85rem;
+  font-size: 0.88rem; font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink); background: var(--paper);
+  transition: border-color 0.18s, background 0.18s;
+  outline: none; width: 100%;
+  -webkit-appearance: none;
+}
+
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--ink);
+  background: white;
+}
+
+.fg textarea { resize: vertical; min-height: 70px; }
+
+/* ====== DIVIDER ====== */
+.divider {
+  height: 1px; background: var(--border);
+  margin: 1.2rem 0;
+}
+
+.section-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.8rem;
+}
+
+/* ====== LOKASI GROUP ====== */
+.lokasi-info {
+  background: #f7f5ef;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.78rem; color: var(--muted);
+  margin-bottom: 0.9rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.lokasi-info strong { color: var(--ink); }
+
+/* ====== PAYMENT TOGGLE ====== */
+.pay-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem; margin-bottom: 1rem;
+}
+
+@media (max-width: 420px) {
+  .pay-grid { grid-template-columns: 1fr; }
+}
+
+.pay-opt {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 0.6rem;
+  text-align: center; cursor: pointer;
+  transition: all 0.2s; background: var(--paper);
+}
+
+.pay-opt:hover { border-color: var(--ink); background: white; }
+
+.pay-opt.active {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.pay-opt.active .pay-icon,
+.pay-opt.active .pay-label { color: white; }
+.pay-opt.active .pay-sub { color: rgba(255,255,255,0.5); }
+
+.pay-icon { font-size: 1.5rem; margin-bottom: 4px; }
+.pay-label { font-size: 0.8rem; font-weight: 600; font-family: 'Syne', sans-serif; color: var(--ink); }
+.pay-sub { font-size: 0.68rem; color: var(--muted); margin-top: 1px; }
+
+/* ====== TRANSFER INFO ====== */
+.tf-box {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 1rem;
+  display: none;
+}
+.tf-box.show { display: block; }
+
+.tf-head {
+  background: var(--ink); color: white;
+  padding: 0.6rem 1rem;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  font-family: 'Syne', sans-serif;
+}
+
+.rek {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap; gap: 8px;
+}
+.rek:last-child { border-bottom: none; }
+
+.rek-bank {
+  font-size: 0.68rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.rek-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--ink);
+  letter-spacing: 1px;
+}
+.rek-name { font-size: 0.78rem; color: var(--muted); }
+
+.copy-btn {
+  background: var(--ink); color: white;
+  border: none; border-radius: var(--radius);
+  padding: 5px 12px; font-size: 0.72rem;
+  font-weight: 600; cursor: pointer;
+  font-family: 'Syne', sans-serif; letter-spacing: 0.3px;
+  transition: background 0.2s; flex-shrink: 0;
+}
+.copy-btn.copied { background: #1a8a3c; }
+
+/* ====== QRIS BOX ====== */
+.qris-wrap {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  display: none;
+  padding: 1.2rem;
+  text-align: center;
+}
+.qris-wrap.show { display: block; }
+
+.qris-label-top {
+  font-size: 0.72rem; font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.8rem;
+}
+
+.qris-img-wrap {
+  display: inline-block;
+  background: white;
+  border-radius: var(--radius);
+  padding: 12px;
+  border: 1px solid var(--border);
+}
+
+.qris-name {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.6rem;
+}
+.qris-name strong { color: var(--ink); }
+
+/* ====== SCREENSHOT NOTICE ====== */
+.ss-alert {
+  background: #fffbf0;
+  border: 1.5px solid #e8c84a;
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  display: none;
+  flex-direction: column; gap: 6px;
+}
+.ss-alert.show { display: flex; }
+.ss-alert-title {
+  font-size: 0.78rem; font-weight: 700;
+  color: #7a5a00; font-family: 'Syne', sans-serif;
+  display: flex; align-items: center; gap: 6px;
+}
+.ss-alert p { font-size: 0.78rem; color: #8a6800; line-height: 1.5; }
+
+/* ====== UPLOAD ====== */
+.upload-zone {
+  border: 2px dashed rgba(13,13,20,0.2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1rem;
+  display: none; background: var(--paper);
+}
+.upload-zone.show { display: block; }
+.upload-zone:hover { border-color: var(--ink); background: white; }
+.upload-zone p { font-size: 0.8rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+#file-bukti { display: none; }
+.upload-confirm { font-size: 0.8rem; color: #1a8a3c; font-weight: 600; margin-top: 6px; }
+
+/* ====== SUBMIT ====== */
+.btn-submit {
+  width: 100%;
+  background: var(--red);
+  color: white; border: none;
+  padding: 1rem;
+  border-radius: var(--radius);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; letter-spacing: 0.5px;
+  transition: all 0.22s;
+  margin-top: 0.5rem;
+}
+.btn-submit:hover { background: var(--red-dark); transform: translateY(-1px); }
+.btn-submit:active { transform: scale(0.99); }
+
+/* ====== SIDEBAR ====== */
+.sidebar { display: flex; flex-direction: column; gap: 1rem; }
+
+.side-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.side-card-head {
+  background: var(--ink); color: white;
+  padding: 0.7rem 1.1rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+.side-card-body { padding: 0.9rem 1.1rem; }
+
+.side-row {
+  display: flex; justify-content: space-between;
+  align-items: flex-start; padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem; gap: 8px;
+}
+.side-row:last-child { border-bottom: none; }
+.side-row .k { color: var(--muted); flex-shrink: 0; }
+.side-row .v { font-weight: 600; text-align: right; }
+
+/* Layanan tag */
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; padding: 0.6rem 0; }
+.tag {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 0.75rem; font-weight: 500; color: var(--ink);
+}
+.tag.active-tag { background: var(--ink); color: white; border-color: var(--ink); }
+
+/* wilayah */
+.wilayah-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--red-glow); border: 1px solid rgba(217,48,37,0.2);
+  color: var(--red); border-radius: 4px;
+  padding: 4px 10px; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.4px; text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  font-family: 'Syne', sans-serif;
+}
+
+/* ====== SUCCESS PAGE ====== */
+.success-page {
+  display: none;
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 3rem 2rem; text-align: center;
+}
+.success-page.show { display: block; }
+
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: #e8f7ed; margin: 0 auto 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem;
+}
+
+.success-page h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem; font-weight: 800; color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.success-page > p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+.order-no {
+  background: var(--paper); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 0.9rem 1.2rem;
+  margin: 1.2rem 0 0.6rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700; letter-spacing: 2px;
+  color: var(--red);
+}
+
+.summary-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border-radius: var(--radius);
+  overflow: hidden; border: 1px solid var(--border);
+  margin: 1rem 0;
+  text-align: left;
+}
+
+@media (max-width: 560px) {
+  .summary-grid { grid-template-columns: 1fr; }
+}
+
+.sum-cell {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+.sum-cell:nth-child(even) { border-right: none; }
+.sum-cell .sum-k { color: var(--muted); font-size: 0.72rem; margin-bottom: 2px; }
+.sum-cell .sum-v { font-weight: 600; color: var(--ink); }
+
+.btn-new {
+  margin-top: 1.5rem;
+  background: var(--ink); color: white;
+  border: none; border-radius: var(--radius);
+  padding: 0.75rem 2rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  letter-spacing: 0.5px; transition: opacity 0.2s;
+}
+.btn-new:hover { opacity: 0.8; }
+
+/* ====== WA FLOAT ====== */
+.wa-float {
+  position: fixed; bottom: 24px; right: 20px;
+  background: #25d366; color: white;
+  width: 50px; height: 50px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; cursor: pointer; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+  z-index: 999; transition: transform 0.2s;
+}
+.wa-float:hover { transform: scale(1.08); }
+
+/* ====== FOOTER ====== */
+footer {
+  background: var(--ink); color: rgba(255,255,255,0.4);
+  text-align: center; padding: 2rem 1.5rem;
+  font-size: 0.78rem; line-height: 2;
+  font-weight: 300;
+}
+footer strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+
+/* ====== REQUIRED ====== */
+.req { color: var(--red); }
+
+/* ====== GOOGLE MAPS WIDGET ====== */
+.gmaps-wrap {
+  background: linear-gradient(135deg, #e8f4fd 0%, #f0f7ff 100%);
+  border: 1.5px solid #b3d4f0;
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.gmaps-header {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 0.9rem;
+}
+.gmaps-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+.gmaps-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem; font-weight: 700; color: #0a3d6b;
+  margin-bottom: 2px;
+}
+.gmaps-hint { font-size: 0.75rem; color: #4a7aab; line-height: 1.4; }
+.gmaps-input-row { display: flex; gap: 8px; }
+.gmaps-input-row input {
+  flex: 1; border: 1.5px solid #9ac2e8;
+  border-radius: var(--radius); padding: 0.65rem 0.85rem;
+  font-size: 0.85rem; font-family: 'DM Sans', sans-serif;
+  color: var(--ink); background: white;
+  outline: none; transition: border-color 0.18s;
+}
+.gmaps-input-row input:focus { border-color: #2980b9; }
+.gmaps-input-row button {
+  background: #1a6eb5; color: white;
+  border: none; border-radius: var(--radius);
+  padding: 0 1rem; font-size: 0.8rem;
+  font-family: 'Syne', sans-serif; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: background 0.2s; letter-spacing: 0.3px; flex-shrink: 0;
+}
+.gmaps-input-row button:hover { background: #0f5a9e; }
+.gmaps-status {
+  margin-top: 0.6rem; font-size: 0.78rem;
+  border-radius: var(--radius); padding: 0.5rem 0.75rem; font-weight: 500;
+}
+.gmaps-status.ok { background:#e8f8ee; color:#1a6e35; border:1px solid #a3d9b8; }
+.gmaps-status.err { background:#fdf0ef; color:#a82019; border:1px solid #f0b8b4; }
+.gmaps-status.loading { background:#fff8e1; color:#7a5a00; border:1px solid #f0d87a; }
+.gmaps-steps {
+  margin-top: 0.75rem; display: flex; flex-wrap: wrap;
+  gap: 4px; font-size: 0.7rem; color: #4a7aab; align-items: center;
+}
+.gmaps-steps span { white-space: nowrap; }
+.gmaps-steps strong { color: #0a3d6b; }
+.gmaps-filled-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #e8f8ee; color: #1a6e35;
+  border: 1px solid #a3d9b8; border-radius: 4px;
+  font-size: 0.72rem; font-weight: 600; padding: 2px 8px;
+  margin-left: 6px; font-family: 'Syne', sans-serif;
+}
+
+/* ====== MOBILE ADJUSTMENTS ====== */
+@media (max-width: 560px) {
+  .hero { padding: 3.5rem 1.2rem 5rem; }
+  header { padding: 0 1.2rem; }
+  .header-tag { display: none; }
+  .main { padding: 2rem 1rem 3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-dot">⚡</div>
+    NexaTech
+    <span class="header-tag">Surabaya</span>
+  </div>
+  <a class="header-wa" href="https://wa.me/6281234567890" target="_blank">
+    💬 WhatsApp
+  </a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">Khusus Wilayah Surabaya</div>
+
+    <h1>Pasang WiFi, CCTV<br>& <span>Perbaiki Server</span></h1>
+
+    <p class="hero-sub">
+      Layanan teknologi profesional untuk bisnis Anda di Surabaya.<br>
+      Tim berpengalaman, garansi terpercaya.
+    </p>
+
+    <!-- PILIH LAYANAN -->
+    <div class="layanan-pills">
+      <div class="pill" onclick="pilihLayanan('wifi', this)" id="pill-wifi">
+        📶 Pemasangan WiFi
+      </div>
+      <div class="pill" onclick="pilihLayanan('cctv', this)" id="pill-cctv">
+        📷 Pemasangan CCTV
+      </div>
+      <div class="pill" onclick="pilihLayanan('server', this)" id="pill-server">
+        🖥️ Perbaikan Server
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEP BAR -->
+  <div class="stepbar">
+    <div class="stepbar-item active" id="s1"><span class="step-num">01</span>Pilih Layanan</div>
+    <div class="stepbar-item" id="s2"><span class="step-num">02</span>Data & Lokasi</div>
+    <div class="stepbar-item" id="s3"><span class="step-num">03</span>Pembayaran</div>
+    <div class="stepbar-item" id="s4"><span class="step-num">04</span>Konfirmasi</div>
+  </div>
+
+  <!-- CONTENT LAYOUT -->
+  <div class="layout">
+
+    <!-- FORM PANEL -->
+    <div>
+      <div class="form-panel" id="form-panel">
+
+        <div class="form-header">
+          <div class="form-header-icon" id="fh-icon">⚡</div>
+          <div>
+            <h3 id="fh-title">Form Pemesanan Layanan</h3>
+            <p id="fh-sub">Isi data dengan lengkap dan benar</p>
+          </div>
+        </div>
+
+        <div class="form-body">
+
+          <!-- DATA DIRI -->
+          <div class="section-label">Data Pemesan</div>
+          <div class="frow">
+            <div class="fg">
+              <label>Nama Lengkap <span class="req">*</span></label>
+              <input type="text" id="nama" placeholder="Nama Anda">
+            </div>
+            <div class="fg">
+              <label>No. WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="wa" placeholder="08xxxxxxxxxx">
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label>Email</label>
+              <input type="email" id="email" placeholder="email@perusahaan.com">
+            </div>
+            <div class="fg">
+              <label>Jabatan / Posisi</label>
+              <input type="text" id="jabatan" placeholder="Manager IT, Owner, dll">
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- DATA PERUSAHAAN -->
+          <div class="section-label">Data Perusahaan / Instansi</div>
+          <div class="frow single">
+            <div class="fg">
+              <label>Nama Perusahaan / Instansi <span class="req">*</span></label>
+              <input type="text" id="perusahaan" placeholder="PT. / CV. / Toko / Kantor / Sekolah ...">
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label>Jenis Tempat <span class="req">*</span></label>
+              <select id="jenis-tempat">
+                <option value="">-- Pilih Jenis --</option>
+                <option>Kantor / Perkantoran</option>
+                <option>Ruko / Toko Retail</option>
+                <option>Gudang / Pergudangan</option>
+                <option>Sekolah / Universitas</option>
+                <option>Hotel / Penginapan</option>
+                <option>Rumah Sakit / Klinik</option>
+                <option>Restoran / Kafe</option>
+                <option>Pabrik / Industri</option>
+                <option>Apartemen / Gedung</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Luas Area (estimasi)</label>
+              <select id="luas">
+                <option value="">-- Pilih Luas --</option>
+                <option>< 50 m²</option>
+                <option>50 – 150 m²</option>
+                <option>150 – 300 m²</option>
+                <option>300 – 500 m²</option>
+                <option>> 500 m²</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- LOKASI SURABAYA -->
+          <div class="section-label">Lokasi di Surabaya <span class="req">*</span></div>
+
+          <div class="lokasi-info">
+            📍 Layanan kami hanya tersedia di wilayah <strong>Kota Surabaya</strong>. Mohon isi lokasi dengan detail.
+          </div>
+
+          <!-- GOOGLE MAPS INPUT -->
+          <div class="gmaps-wrap">
+            <div class="gmaps-header">
+              <span class="gmaps-icon">🗺️</span>
+              <div>
+                <div class="gmaps-title">Isi Otomatis via Link Google Maps</div>
+                <div class="gmaps-hint">Paste link lokasi dari Google Maps — semua field lokasi terisi otomatis</div>
+              </div>
+            </div>
+            <div class="gmaps-input-row">
+              <input type="text" id="gmaps-link" placeholder="https://maps.app.goo.gl/... atau https://www.google.com/maps/..." oninput="gmapsPreview()" />
+              <button type="button" onclick="parseGmaps()">Isi Otomatis ↗</button>
+            </div>
+            <div id="gmaps-status" class="gmaps-status" style="display:none;"></div>
+            <div class="gmaps-steps">
+              <span>Cara mendapatkan link:</span>
+              <span>① Buka Google Maps</span>
+              <span>→ ② Cari lokasi Anda</span>
+              <span>→ ③ Klik <strong>Bagikan</strong> / <strong>Share</strong></span>
+              <span>→ ④ Salin link & paste di sini</span>
+            </div>
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label>Kecamatan <span class="req">*</span></label>
+              <select id="kecamatan" onchange="updateKelurahan()">
+                <option value="">-- Pilih Kecamatan --</option>
+                <option>Genteng</option>
+                <option>Tegalsari</option>
+                <option>Bubutan</option>
+                <option>Simokerto</option>
+                <option>Pabean Cantikan</option>
+                <option>Semampir</option>
+                <option>Krembangan</option>
+                <option>Kenjeran</option>
+                <option>Bulak</option>
+                <option>Tambaksari</option>
+                <option>Gubeng</option>
+                <option>Rungkut</option>
+                <option>Tenggilis Mejoyo</option>
+                <option>Gunung Anyar</option>
+                <option>Sukolilo</option>
+                <option>Mulyorejo</option>
+                <option>Sawahan</option>
+                <option>Wonokromo</option>
+                <option>Karang Pilang</option>
+                <option>Dukuh Pakis</option>
+                <option>Wiyung</option>
+                <option>Gayungan</option>
+                <option>Wonocolo</option>
+                <option>Jambangan</option>
+                <option>Lakarsantri</option>
+                <option>Sambikerep</option>
+                <option>Tandes</option>
+                <option>Sukomanunggal</option>
+                <option>Asemrowo</option>
+                <option>Benowo</option>
+                <option>Pakal</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Kelurahan / Area <span class="req">*</span></label>
+              <input type="text" id="kelurahan" placeholder="Nama kelurahan / area">
+            </div>
+          </div>
+
+          <div class="frow single">
+            <div class="fg">
+              <label>Nama Jalan <span class="req">*</span></label>
+              <input type="text" id="jalan" placeholder="Contoh: Jl. Darmo No. 45, Jl. HR Muhammad No. 12 ...">
+            </div>
+          </div>
+
+          <div class="frow">
+            <div class="fg">
+              <label>Nomor / Blok</label>
+              <input type="text" id="nomor" placeholder="No. / Blok / Lt.">
+            </div>
+            <div class="fg">
+              <label>Patokan / Landmark</label>
+              <input type="text" id="patokan" placeholder="Dekat mall / ruko / gedung...">
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- JADWAL -->
+          <div class="section-label">Jadwal Kunjungan</div>
+          <div class="frow">
+            <div class="fg">
+              <label>Tanggal <span class="req">*</span></label>
+              <input type="date" id="tanggal">
+            </div>
+            <div class="fg">
+              <label>Sesi Waktu <span class="req">*</span></label>
+              <select id="sesi">
+                <option value="">-- Pilih Sesi --</option>
+                <option>Pagi · 08:00 – 10:00</option>
+                <option>Siang · 10:00 – 12:00</option>
+                <option>Sore awal · 13:00 – 15:00</option>
+                <option>Sore · 15:00 – 17:00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="frow single">
+            <div class="fg">
+              <label>Keterangan Tambahan</label>
+              <textarea id="keterangan" placeholder="Jumlah titik kamera, kondisi jaringan, kebutuhan khusus, dll..."></textarea>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- PEMBAYARAN -->
+          <div class="section-label">Metode Pembayaran <span class="req">*</span></div>
+
+          <div class="pay-grid">
+            <div class="pay-opt" onclick="pilihBayar('transfer', this)">
+              <div class="pay-icon">🏦</div>
+              <div class="pay-label">Transfer</div>
+              <div class="pay-sub">Via rekening bank</div>
+            </div>
+            <div class="pay-opt" onclick="pilihBayar('qris', this)">
+              <div class="pay-icon">📱</div>
+              <div class="pay-label">QRIS</div>
+              <div class="pay-sub">Scan kode QR</div>
+            </div>
+            <div class="pay-opt" onclick="pilihBayar('cash', this)">
+              <div class="pay-icon">💵</div>
+              <div class="pay-label">Cash</div>
+              <div class="pay-sub">Bayar saat datang</div>
+            </div>
+          </div>
+
+          <!-- REKENING TRANSFER -->
+          <div class="tf-box" id="tf-box">
+            <div class="tf-head">Nomor Rekening Tujuan</div>
+            <div class="rek">
+              <div>
+                <div class="rek-bank">BCA</div>
+                <div class="rek-num">1234 5678 90</div>
+                <div class="rek-name">a.n. NexaTech Surabaya</div>
+              </div>
+              <button class="copy-btn" onclick="salin('1234567890', this)">Salin</button>
+            </div>
+            <div class="rek">
+              <div>
+                <div class="rek-bank">Mandiri</div>
+                <div class="rek-num">1400 0012 3456 7</div>
+                <div class="rek-name">a.n. NexaTech Surabaya</div>
+              </div>
+              <button class="copy-btn" onclick="salin('14000012345677', this)">Salin</button>
+            </div>
+            <div class="rek">
+              <div>
+                <div class="rek-bank">BNI</div>
+                <div class="rek-num">0987 6543 21</div>
+                <div class="rek-name">a.n. NexaTech Surabaya</div>
+              </div>
+              <button class="copy-btn" onclick="salin('0987654321', this)">Salin</button>
+            </div>
+          </div>
+
+          <!-- QRIS -->
+          <div class="qris-wrap" id="qris-wrap">
+            <div class="qris-label-top">Scan QRIS Berikut</div>
+            <div class="qris-img-wrap">
+              <svg width="176" height="176" viewBox="0 0 176 176" xmlns="http://www.w3.org/2000/svg">
+                <rect width="176" height="176" fill="white"/>
+                <!-- Corner TL -->
+                <rect x="8" y="8" width="48" height="48" rx="4" fill="#0d0d14"/>
+                <rect x="14" y="14" width="36" height="36" rx="2" fill="white"/>
+                <rect x="18" y="18" width="28" height="28" rx="1" fill="#0d0d14"/>
+                <!-- Corner TR -->
+                <rect x="120" y="8" width="48" height="48" rx="4" fill="#0d0d14"/>
+                <rect x="126" y="14" width="36" height="36" rx="2" fill="white"/>
+                <rect x="130" y="18" width="28" height="28" rx="1" fill="#0d0d14"/>
+                <!-- Corner BL -->
+                <rect x="8" y="120" width="48" height="48" rx="4" fill="#0d0d14"/>
+                <rect x="14" y="126" width="36" height="36" rx="2" fill="white"/>
+                <rect x="18" y="130" width="28" height="28" rx="1" fill="#0d0d14"/>
+                <!-- Data dots scattered -->
+                <rect x="68" y="8" width="6" height="6" fill="#0d0d14"/>
+                <rect x="78" y="14" width="6" height="6" fill="#0d0d14"/>
+                <rect x="88" y="8" width="6" height="6" fill="#0d0d14"/>
+                <rect x="100" y="12" width="6" height="6" fill="#0d0d14"/>
+                <rect x="110" y="8" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="22" width="6" height="6" fill="#0d0d14"/>
+                <rect x="82" y="28" width="6" height="6" fill="#0d0d14"/>
+                <rect x="96" y="22" width="6" height="6" fill="#0d0d14"/>
+                <rect x="108" y="28" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="36" width="6" height="6" fill="#0d0d14"/>
+                <rect x="78" y="42" width="6" height="6" fill="#0d0d14"/>
+                <rect x="92" y="38" width="6" height="6" fill="#0d0d14"/>
+                <rect x="106" y="36" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="50" width="6" height="6" fill="#0d0d14"/>
+                <rect x="80" y="56" width="6" height="6" fill="#0d0d14"/>
+                <rect x="94" y="52" width="6" height="6" fill="#0d0d14"/>
+                <rect x="108" y="56" width="6" height="6" fill="#0d0d14"/>
+                <rect x="8" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="18" y="74" width="6" height="6" fill="#0d0d14"/>
+                <rect x="30" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="42" y="74" width="6" height="6" fill="#0d0d14"/>
+                <rect x="54" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="80" y="74" width="6" height="6" fill="#0d0d14"/>
+                <rect x="92" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="104" y="74" width="6" height="6" fill="#0d0d14"/>
+                <rect x="118" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="130" y="74" width="6" height="6" fill="#0d0d14"/>
+                <rect x="142" y="68" width="6" height="6" fill="#0d0d14"/>
+                <rect x="156" y="74" width="6" height="6" fill="#0d0d14"/>
+                <rect x="8" y="82" width="6" height="6" fill="#0d0d14"/>
+                <rect x="22" y="88" width="6" height="6" fill="#0d0d14"/>
+                <rect x="36" y="82" width="6" height="6" fill="#0d0d14"/>
+                <rect x="50" y="88" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="82" width="6" height="6" fill="#0d0d14"/>
+                <rect x="84" y="88" width="6" height="6" fill="#0d0d14"/>
+                <rect x="100" y="82" width="6" height="6" fill="#0d0d14"/>
+                <rect x="116" y="88" width="6" height="6" fill="#0d0d14"/>
+                <rect x="132" y="82" width="6" height="6" fill="#0d0d14"/>
+                <rect x="148" y="88" width="6" height="6" fill="#0d0d14"/>
+                <rect x="162" y="82" width="6" height="6" fill="#0d0d14"/>
+                <rect x="8" y="96" width="6" height="6" fill="#0d0d14"/>
+                <rect x="20" y="102" width="6" height="6" fill="#0d0d14"/>
+                <rect x="34" y="96" width="6" height="6" fill="#0d0d14"/>
+                <rect x="48" y="102" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="96" width="6" height="6" fill="#0d0d14"/>
+                <rect x="82" y="102" width="6" height="6" fill="#0d0d14"/>
+                <rect x="98" y="96" width="6" height="6" fill="#0d0d14"/>
+                <rect x="114" y="102" width="6" height="6" fill="#0d0d14"/>
+                <rect x="128" y="96" width="6" height="6" fill="#0d0d14"/>
+                <rect x="144" y="102" width="6" height="6" fill="#0d0d14"/>
+                <rect x="160" y="96" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="112" width="6" height="6" fill="#0d0d14"/>
+                <rect x="80" y="118" width="6" height="6" fill="#0d0d14"/>
+                <rect x="94" y="112" width="6" height="6" fill="#0d0d14"/>
+                <rect x="110" y="118" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="126" width="6" height="6" fill="#0d0d14"/>
+                <rect x="82" y="132" width="6" height="6" fill="#0d0d14"/>
+                <rect x="98" y="126" width="6" height="6" fill="#0d0d14"/>
+                <rect x="68" y="140" width="6" height="6" fill="#0d0d14"/>
+                <rect x="80" y="148" width="6" height="6" fill="#0d0d14"/>
+                <rect x="96" y="140" width="6" height="6" fill="#0d0d14"/>
+                <rect x="110" y="148" width="6" height="6" fill="#0d0d14"/>
+                <rect x="118" y="126" width="6" height="6" fill="#0d0d14"/>
+                <rect x="132" y="132" width="6" height="6" fill="#0d0d14"/>
+                <rect x="148" y="126" width="6" height="6" fill="#0d0d14"/>
+                <rect x="160" y="132" width="6" height="6" fill="#0d0d14"/>
+                <rect x="120" y="140" width="6" height="6" fill="#0d0d14"/>
+                <rect x="136" y="148" width="6" height="6" fill="#0d0d14"/>
+                <rect x="150" y="140" width="6" height="6" fill="#0d0d14"/>
+                <rect x="162" y="148" width="6" height="6" fill="#0d0d14"/>
+                <rect x="120" y="156" width="6" height="6" fill="#0d0d14"/>
+                <rect x="138" y="162" width="6" height="6" fill="#0d0d14"/>
+                <rect x="154" y="156" width="6" height="6" fill="#0d0d14"/>
+                <!-- Center logo placeholder -->
+                <rect x="76" y="76" width="24" height="24" rx="3" fill="#d93025"/>
+                <text x="88" y="92" text-anchor="middle" font-size="11" fill="white" font-weight="bold" font-family="Arial">N</text>
+              </svg>
+            </div>
+            <div class="qris-name">Scan dengan bank/e-wallet apapun<br><strong>a.n. NexaTech Surabaya</strong></div>
+          </div>
+
+          <!-- SCREENSHOT ALERT -->
+          <div class="ss-alert" id="ss-alert">
+            <div class="ss-alert-title">📸 Wajib Upload Screenshot Bukti Bayar!</div>
+            <p>Setelah transfer / scan QRIS berhasil, ambil <strong>screenshot bukti pembayaran</strong> lalu upload di bawah. Pesanan hanya diproses setelah bukti bayar diterima dan diverifikasi tim kami.</p>
+          </div>
+
+          <!-- UPLOAD ZONA -->
+          <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-bukti').click()">
+            🖼️
+            <p><strong>Klik di sini untuk upload screenshot bukti bayar</strong><br>Format: JPG / PNG · Maks 5 MB</p>
+            <input type="file" id="file-bukti" accept="image/*" onchange="fileSelected(this)">
+            <div class="upload-confirm" id="upload-confirm"></div>
+          </div>
+
+          <button class="btn-submit" onclick="submit()">Kirim Pesanan →</button>
+
+        </div><!-- /form-body -->
+      </div><!-- /form-panel -->
+
+      <!-- SUCCESS -->
+      <div class="success-page" id="success-page">
+        <div class="success-icon">✅</div>
+        <h2>Pesanan Terkirim!</h2>
+        <p>Tim NexaTech Surabaya akan menghubungi Anda<br>melalui WhatsApp dalam <strong>1–2 jam kerja</strong>.</p>
+        <div class="order-no" id="order-no">TPS-000000</div>
+        <p style="font-size:0.75rem;color:var(--muted)">Simpan nomor order ini sebagai referensi</p>
+        <div class="summary-grid" id="sum-grid"></div>
+        <button class="btn-new" onclick="reset()">+ Buat Pesanan Baru</button>
+      </div>
+
+    </div><!-- /left col -->
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar" style="display:none;">
+
+      <div class="side-card">
+        <div class="side-card-head">📍 Wilayah Layanan</div>
+        <div class="side-card-body">
+          <div class="wilayah-badge">🏙️ Kota Surabaya</div>
+          <div style="font-size:0.8rem; color:var(--muted); line-height:1.6;">
+            Seluruh 31 kecamatan di wilayah Kota Surabaya. Meliputi Surabaya Pusat, Utara, Selatan, Timur, dan Barat.
+          </div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">🛠️ Layanan Dipilih</div>
+        <div class="side-card-body">
+          <div class="tag-row" id="tag-layanan">
+            <span class="tag">Pilih layanan di atas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">⏱️ Estimasi Pengerjaan</div>
+        <div class="side-card-body">
+          <div class="side-row"><span class="k">Respon konfirmasi</span><span class="v">1–2 jam</span></div>
+          <div class="side-row"><span class="k">Survey lokasi</span><span class="v">1 hari kerja</span></div>
+          <div class="side-row"><span class="k">Pemasangan WiFi</span><span class="v">1 hari</span></div>
+          <div class="side-row"><span class="k">Pemasangan CCTV</span><span class="v">1–2 hari</span></div>
+          <div class="side-row"><span class="k">Perbaikan server</span><span class="v">1–3 hari</span></div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">✅ Garansi & Jaminan</div>
+        <div class="side-card-body">
+          <div class="side-row"><span class="k">Garansi pasang</span><span class="v">30 hari</span></div>
+          <div class="side-row"><span class="k">Teknisi</span><span class="v">Bersertifikat</span></div>
+          <div class="side-row"><span class="k">Material</span><span class="v">Garansi resmi</span></div>
+          <div class="side-row"><span class="k">After-service</span><span class="v">Free konsultasi</span></div>
+        </div>
+      </div>
+
+      <div class="side-card">
+        <div class="side-card-head">📞 Kontak Kami</div>
+        <div class="side-card-body">
+          <div class="side-row"><span class="k">WhatsApp</span><span class="v">0812-3456-7890</span></div>
+          <div class="side-row"><span class="k">Jam operasional</span><span class="v">08.00–17.00</span></div>
+          <div class="side-row"><span class="k">Hari kerja</span><span class="v">Senin – Sabtu</span></div>
+        </div>
+      </div>
+
+    </div><!-- /sidebar -->
+
+  </div><!-- /layout -->
+
+</div><!-- /main -->
+
+<footer>
+  <strong>NexaTech Surabaya</strong><br>
+  Layanan Profesional WiFi · CCTV · Server<br>
+  Beroperasi Senin–Sabtu · 08:00–17:00 WIB · Seluruh Wilayah Kota Surabaya<br>
+  <span style="font-size:0.72rem;opacity:0.6;">© 2025 NexaTech Surabaya · All Rights Reserved</span>
+</footer>
+
+<a class="wa-float" href="https://wa.me/6281234567890" target="_blank" title="Chat WhatsApp">💬</a>
+
+<script>
+let layanan = '';
+let bayar = '';
+
+const layananMap = {
+  wifi:   { icon:'📶', label:'Pemasangan WiFi',   sub:'Jaringan wireless profesional' },
+  cctv:   { icon:'📷', label:'Pemasangan CCTV',   sub:'Sistem kamera pengawas' },
+  server: { icon:'🖥️', label:'Perbaikan Server',  sub:'Diagnosa & perbaiki server' }
+};
+
+function pilihLayanan(jenis, el) {
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  layanan = jenis;
+
+  const m = layananMap[jenis];
+  document.getElementById('fh-icon').textContent = m.icon;
+  document.getElementById('fh-title').textContent = m.label;
+  document.getElementById('fh-sub').textContent = m.sub;
+
+  document.getElementById('form-panel').classList.add('show');
+  document.getElementById('sidebar').style.display = 'flex';
+
+  // update step
+  stepDone('s1');
+  stepActive('s2');
+
+  // update tag sidebar
+  document.getElementById('tag-layanan').innerHTML =
+    `<span class="tag active-tag">${m.icon} ${m.label}</span>`;
+
+  // tanggal min hari ini
+  const td = new Date().toISOString().split('T')[0];
+  document.getElementById('tanggal').min = td;
+
+  setTimeout(() => {
+    document.getElementById('form-panel').scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 80);
+}
+
+function pilihBayar(metode, el) {
+  document.querySelectorAll('.pay-opt').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  bayar = metode;
+
+  document.getElementById('tf-box').classList.remove('show');
+  document.getElementById('qris-wrap').classList.remove('show');
+  document.getElementById('ss-alert').classList.remove('show');
+  document.getElementById('upload-zone').classList.remove('show');
+
+  stepDone('s2'); stepActive('s3');
+
+  if (metode === 'transfer') {
+    document.getElementById('tf-box').classList.add('show');
+    document.getElementById('ss-alert').classList.add('show');
+    document.getElementById('upload-zone').classList.add('show');
+  } else if (metode === 'qris') {
+    document.getElementById('qris-wrap').classList.add('show');
+    document.getElementById('ss-alert').classList.add('show');
+    document.getElementById('upload-zone').classList.add('show');
+  }
+}
+
+function salin(nomor, btn) {
+  navigator.clipboard.writeText(nomor).then(() => {
+    btn.textContent = '✓ Tersalin';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2200);
+  }).catch(() => { btn.textContent = '✓ OK'; });
+}
+
+function fileSelected(input) {
+  if (input.files && input.files[0]) {
+    document.getElementById('upload-confirm').textContent = '✅ ' + input.files[0].name;
+  }
+}
+
+function stepDone(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('active'); el.classList.add('done');
+}
+function stepActive(id) {
+  document.getElementById(id).classList.add('active');
+}
+
+function submit() {
+  // Validasi
+  const v = (id) => document.getElementById(id).value.trim();
+
+  if (!layanan) { alert('Silakan pilih layanan terlebih dahulu.'); return; }
+  if (!v('nama')) { alert('Nama lengkap wajib diisi.'); return; }
+  if (!v('wa')) { alert('Nomor WhatsApp wajib diisi.'); return; }
+  if (!v('perusahaan')) { alert('Nama perusahaan/instansi wajib diisi.'); return; }
+  if (!v('jenis-tempat')) { alert('Jenis tempat wajib dipilih.'); return; }
+  if (!v('kecamatan')) { alert('Kecamatan di Surabaya wajib dipilih.'); return; }
+  if (!v('kelurahan')) { alert('Kelurahan/area wajib diisi.'); return; }
+  if (!v('jalan')) { alert('Nama jalan wajib diisi.'); return; }
+  if (!v('tanggal')) { alert('Tanggal kunjungan wajib diisi.'); return; }
+  if (!v('sesi')) { alert('Sesi waktu wajib dipilih.'); return; }
+  if (!bayar) { alert('Metode pembayaran wajib dipilih.'); return; }
+
+  if (bayar === 'transfer' || bayar === 'qris') {
+    const f = document.getElementById('file-bukti').files[0];
+    if (!f) {
+      alert('Harap upload screenshot bukti pembayaran terlebih dahulu!');
+      return;
+    }
+  }
+
+  // Build summary
+  const no = 'NXT-' + Date.now().toString().slice(-6);
+  const layananLabel = layananMap[layanan].icon + ' ' + layananMap[layanan].label;
+  const bayarLabel = { transfer:'Transfer Bank', qris:'QRIS', cash:'Cash / Tunai' }[bayar];
+  const tgl = new Date(v('tanggal')).toLocaleDateString('id-ID', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const alamatFull = `Jl. ${v('jalan')}, Kel. ${v('kelurahan')}, Kec. ${v('kecamatan')}, Surabaya`;
+
+  document.getElementById('order-no').textContent = no;
+  document.getElementById('sum-grid').innerHTML = `
+    <div class="sum-cell"><div class="sum-k">Layanan</div><div class="sum-v">${layananLabel}</div></div>
+    <div class="sum-cell"><div class="sum-k">Nama</div><div class="sum-v">${v('nama')}</div></div>
+    <div class="sum-cell"><div class="sum-k">WhatsApp</div><div class="sum-v">${v('wa')}</div></div>
+    <div class="sum-cell"><div class="sum-k">Perusahaan</div><div class="sum-v">${v('perusahaan')}</div></div>
+    <div class="sum-cell"><div class="sum-k">Jenis Tempat</div><div class="sum-v">${v('jenis-tempat')}</div></div>
+    <div class="sum-cell"><div class="sum-k">Pembayaran</div><div class="sum-v">${bayarLabel}</div></div>
+    <div class="sum-cell" style="grid-column:1/-1"><div class="sum-k">Lokasi</div><div class="sum-v">${alamatFull}</div></div>
+    <div class="sum-cell"><div class="sum-k">Tanggal</div><div class="sum-v">${tgl}</div></div>
+    <div class="sum-cell"><div class="sum-k">Sesi</div><div class="sum-v">${v('sesi')}</div></div>
+  `;
+
+  stepDone('s3'); stepActive('s4');
+
+  document.getElementById('form-panel').classList.remove('show');
+  document.getElementById('sidebar').style.display = 'none';
+  document.getElementById('success-page').classList.add('show');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function reset() {
+  // Reset all
+  layanan = ''; bayar = '';
+  document.getElementById('success-page').classList.remove('show');
+  document.getElementById('form-panel').classList.remove('show');
+  document.getElementById('sidebar').style.display = 'none';
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.pay-opt').forEach(b => b.classList.remove('active'));
+  ['tf-box','qris-wrap','ss-alert','upload-zone'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+  ['s1','s2','s3','s4'].forEach(id => {
+    const el = document.getElementById(id);
+    el.classList.remove('done','active');
+  });
+  document.getElementById('s1').classList.add('active');
+  document.getElementById('tag-layanan').innerHTML = '<span class="tag">Pilih layanan di atas</span>';
+  document.getElementById('upload-confirm').textContent = '';
+  document.getElementById('file-bukti').value = '';
+
+  // Clear fields
+  document.getElementById('gmaps-link').value = '';
+  const st = document.getElementById('gmaps-status');
+  if (st) { st.style.display = 'none'; st.className = 'gmaps-status'; }
+  ['nama','wa','email','jabatan','perusahaan','kelurahan','jalan','nomor','patokan','tanggal','keterangan'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['jenis-tempat','kecamatan','luas','sesi'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ====== GOOGLE MAPS PARSER ======
+
+// Peta kecamatan Surabaya → kelurahan-kelurahan di dalamnya
+const KECAMATAN_DATA = {
+  'Genteng':          ['Genteng','Tegalsari','Kapasari','Peneleh','Ketabang'],
+  'Tegalsari':        ['Tegalsari','Dr. Soetomo','Keputran','Wonorejo'],
+  'Bubutan':          ['Bubutan','Alon-Alon Contong','Gundih','Jepara','Tembok Dukuh'],
+  'Simokerto':        ['Simokerto','Simolawang','Kapasan','Tambakrejo','Sidodadi'],
+  'Pabean Cantikan':  ['Pabean Cantikan','Nyamplungan','Krembangan Utara','Bongkaran','Perak Timur'],
+  'Semampir':         ['Semampir','Ujung','Ampel','Sidotopo','Pegirian'],
+  'Krembangan':       ['Krembangan Selatan','Dupak','Morokrembangan','Kemayoran','Perak Barat'],
+  'Kenjeran':         ['Kenjeran','Bulak Banteng','Tambak Wedi','Sidotopo Wetan'],
+  'Bulak':            ['Bulak','Kedung Cowek','Sukolilo Baru','Kenjeran'],
+  'Tambaksari':       ['Tambaksari','Pacarkeling','Rangkah','Ploso','Gading','Dukuh Setro','Pacar Kembang'],
+  'Gubeng':           ['Gubeng','Baratajaya','Mojo','Kertajaya','Airlangga','Pucang Sewu'],
+  'Rungkut':          ['Rungkut Kidul','Kali Rungkut','Wonorejo','Medokan Ayu','Penjaringan Sari','Kedung Baruk'],
+  'Tenggilis Mejoyo': ['Tenggilis Mejoyo','Kendangsari','Kutisari','Prapen'],
+  'Gunung Anyar':     ['Gunung Anyar','Gunung Anyar Tambak','Rungkut Menanggal','Rungkut Tengah'],
+  'Sukolilo':         ['Sukolilo','Klampis Ngasem','Semolowaru','Medokan Semampir','Keputih','Gebang Putih'],
+  'Mulyorejo':        ['Mulyorejo','Kalijudan','Dukuh Sutorejo','Manyar Sabrangan','Kejawan Putih Tambak','Kalisari'],
+  'Sawahan':          ['Sawahan','Putat Jaya','Pakis','Banyu Urip','Kupang Krajan','Petemon'],
+  'Wonokromo':        ['Wonokromo','Ngagel','Ngagel Rejo','Jagir','Darmo','Sawunggaling'],
+  'Karang Pilang':    ['Karang Pilang','Waru Gunung','Kebraon','Kedurus'],
+  'Dukuh Pakis':      ['Dukuh Pakis','Pradah Kalikendal','Gunung Sari','Gayungan'],
+  'Wiyung':           ['Wiyung','Babadan','Jajar Tunggal','Balasklumprik'],
+  'Gayungan':         ['Gayungan','Dukuh Menanggal','Menanggal','Ketintang'],
+  'Wonocolo':         ['Wonocolo','Bendul Merisi','Sidosermo','Margorejo'],
+  'Jambangan':        ['Jambangan','Karah','Kebonsari','Pagesangan'],
+  'Lakarsantri':      ['Lakarsantri','Lidah Kulon','Lidah Wetan','Jeruk','Bangkingan','Sumur Welut'],
+  'Sambikerep':       ['Sambikerep','Made','Lontar','Bringin'],
+  'Tandes':           ['Tandes','Balongsari','Manukan Kulon','Manukan Wetan','Karangpoh'],
+  'Sukomanunggal':    ['Sukomanunggal','Simomulyo','Simomulyo Baru','Tanjungsari','Putat Gede'],
+  'Asemrowo':         ['Asemrowo','Genting Kalianak','Tambak Sarioso'],
+  'Benowo':           ['Benowo','Sememi','Kandangan','Romokalisari','Tambak Oso Wilangon'],
+  'Pakal':            ['Pakal','Babat Jerawat','Sumberejo','Benowo'],
+};
+
+// Kata kunci jalan/alamat di Surabaya → kecamatan yang paling cocok
+const JALAN_KECAMATAN = {
+  'darmo': 'Wonokromo', 'raya darmo': 'Wonokromo', 'diponegoro': 'Tegalsari',
+  'basuki rahmat': 'Genteng', 'tunjungan': 'Genteng', 'pemuda': 'Genteng',
+  'embong malang': 'Genteng', 'praban': 'Genteng', 'blauran': 'Genteng',
+  'raya gubeng': 'Gubeng', 'gubeng': 'Gubeng', 'manyar': 'Gubeng',
+  'kertajaya': 'Gubeng', 'dharmahusada': 'Mulyorejo',
+  'hr muhammad': 'Dukuh Pakis', 'h.r. muhammad': 'Dukuh Pakis',
+  'raya kupang': 'Sawahan', 'mayjend sungkono': 'Dukuh Pakis',
+  'mayjen sungkono': 'Dukuh Pakis', 'a. yani': 'Gayungan',
+  'ahmad yani': 'Gayungan', 'wonokromo': 'Wonokromo',
+  'raya kenjeran': 'Kenjeran', 'kenjeran': 'Kenjeran',
+  'kapas krampung': 'Tambaksari', 'tambaksari': 'Tambaksari',
+  'semampir': 'Semampir', 'ampel': 'Semampir',
+  'perak': 'Krembangan', 'rajawali': 'Krembangan',
+  'bubutan': 'Bubutan', 'dupak': 'Krembangan',
+  'raya rungkut': 'Rungkut', 'rungkut industri': 'Rungkut',
+  'rungkut': 'Rungkut', 'medokan': 'Rungkut',
+  'nginden': 'Sukolilo', 'klampis': 'Sukolilo',
+  'semolowaru': 'Sukolilo', 'keputih': 'Sukolilo',
+  'mulyosari': 'Mulyorejo', 'kalijudan': 'Mulyorejo',
+  'wiyung': 'Wiyung', 'menganti': 'Wiyung',
+  'lakarsantri': 'Lakarsantri', 'lidah': 'Lakarsantri',
+  'sambikerep': 'Sambikerep', 'lontar': 'Sambikerep',
+  'benowo': 'Benowo', 'sememi': 'Benowo',
+  'tandes': 'Tandes', 'manukan': 'Tandes',
+  'sukomanunggal': 'Sukomanunggal', 'jemursari': 'Wonocolo',
+  'wonocolo': 'Wonocolo', 'ketintang': 'Gayungan',
+  'jambangan': 'Jambangan', 'karah': 'Jambangan',
+  'gunung sari': 'Wiyung', 'waru': 'Karang Pilang',
+  'karang pilang': 'Karang Pilang', 'kedurus': 'Karang Pilang',
+  'pasar turi': 'Bubutan', 'sawahan': 'Sawahan',
+  'putat jaya': 'Sawahan', 'petemon': 'Sawahan',
+  'tenggilis': 'Tenggilis Mejoyo', 'kendangsari': 'Tenggilis Mejoyo',
+  'bulak': 'Bulak', 'kedung cowek': 'Bulak',
+  'simokerto': 'Simokerto', 'kapasan': 'Simokerto',
+};
+
+function gmapsPreview() {
+  const status = document.getElementById('gmaps-status');
+  const val = document.getElementById('gmaps-link').value.trim();
+  if (!val) { status.style.display = 'none'; return; }
+}
+
+async function parseGmaps() {
+  const input = document.getElementById('gmaps-link').value.trim();
+  const status = document.getElementById('gmaps-status');
+
+  if (!input) {
+    showStatus('err', '⚠️ Masukkan link Google Maps terlebih dahulu.');
+    return;
+  }
+
+  showStatus('loading', '⏳ Membaca informasi lokasi dari link...');
+
+  try {
+    // Coba ekstrak koordinat dari berbagai format link Google Maps
+    let lat = null, lng = null, alamatRaw = '';
+
+    // Format 1: /@lat,lng,zoom
+    let m = input.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+    if (m) { lat = parseFloat(m[1]); lng = parseFloat(m[2]); }
+
+    // Format 2: ?q=lat,lng
+    if (!lat) {
+      m = input.match(/[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/);
+      if (m) { lat = parseFloat(m[1]); lng = parseFloat(m[2]); }
+    }
+
+    // Format 3: /place/nama-tempat/@lat,lng
+    const placeMatch = input.match(/\/place\/([^/@]+)/);
+    if (placeMatch) {
+      alamatRaw = decodeURIComponent(placeMatch[1]).replace(/\+/g,' ');
+    }
+
+    // Format 4: ?q=nama+alamat
+    const qMatch = input.match(/[?&]q=([^&]+)/);
+    if (qMatch && !alamatRaw) {
+      alamatRaw = decodeURIComponent(qMatch[1]).replace(/\+/g,' ');
+    }
+
+    // Coba geocode menggunakan Nominatim (gratis, no API key)
+    if (lat && lng) {
+      await geocodeByCoords(lat, lng);
+    } else if (alamatRaw) {
+      await geocodeByQuery(alamatRaw + ' Surabaya');
+    } else {
+      // Coba ekstrak nama dari URL pendek atau teks bebas
+      await geocodeByQuery(input.replace(/https?:\/\/[^\s]+/g,'').trim() + ' Surabaya');
+    }
+
+  } catch(e) {
+    showStatus('err', '❌ Gagal membaca lokasi. Coba isi manual atau gunakan link maps.google.com yang lengkap.');
+  }
+}
+
+async function geocodeByCoords(lat, lng) {
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&accept-language=id`;
+  const res = await fetch(url, { headers: { 'Accept-Language': 'id' } });
+  if (!res.ok) throw new Error('fetch fail');
+  const data = await res.json();
+  fillFromNominatim(data);
+}
+
+async function geocodeByQuery(query) {
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=1&accept-language=id&countrycodes=id`;
+  const res = await fetch(url, { headers: { 'Accept-Language': 'id' } });
+  if (!res.ok) throw new Error('fetch fail');
+  const data = await res.json();
+  if (!data || data.length === 0) {
+    showStatus('err', '❌ Lokasi tidak ditemukan. Pastikan ini adalah alamat di Surabaya dan coba lagi.');
+    return;
+  }
+  fillFromNominatim(data[0]);
+}
+
+function fillFromNominatim(data) {
+  const addr = data.address || {};
+  const displayName = data.display_name || '';
+
+  // Cek apakah di Surabaya
+  const city = (addr.city || addr.town || addr.municipality || addr.county || '').toLowerCase();
+  const isSuby = city.includes('surabaya') || displayName.toLowerCase().includes('surabaya');
+  if (!isSuby) {
+    showStatus('err', '⚠️ Lokasi ini berada di luar Kota Surabaya. Layanan kami hanya tersedia di Surabaya.');
+    return;
+  }
+
+  // Ambil komponen alamat
+  const jalan = buildJalan(addr);
+  const kelurahan = addr.suburb || addr.village || addr.neighbourhood || addr.quarter || '';
+  const kecamatan = findKecamatan(addr, jalan, displayName);
+  const patokan = addr.amenity || addr.shop || addr.building || addr.tourism || '';
+
+  // Isi field
+  let filled = [];
+
+  if (jalan) {
+    document.getElementById('jalan').value = jalan;
+    filled.push('Nama Jalan');
+  }
+
+  if (kelurahan) {
+    document.getElementById('kelurahan').value
+      = capitalizeWords(kelurahan.replace(/kelurahan\s*/i,'').trim());
+    filled.push('Kelurahan');
+  }
+
+  if (kecamatan) {
+    const sel = document.getElementById('kecamatan');
+    const opts = Array.from(sel.options);
+    const match = opts.find(o => o.text.toLowerCase().includes(kecamatan.toLowerCase())
+                                || kecamatan.toLowerCase().includes(o.text.toLowerCase()));
+    if (match) { sel.value = match.value; filled.push('Kecamatan'); }
+  }
+
+  if (patokan) {
+    document.getElementById('patokan').value = capitalizeWords(patokan);
+    filled.push('Patokan');
+  }
+
+  if (filled.length === 0) {
+    showStatus('err', '⚠️ Link berhasil dibaca tapi data alamat terlalu minim. Coba link yang lebih spesifik.');
+    return;
+  }
+
+  showStatus('ok', `✅ Berhasil! Field terisi otomatis: ${filled.join(', ')}.`);
+}
+
+function buildJalan(addr) {
+  const parts = [];
+  if (addr.road) parts.push('Jl. ' + capitalizeWords(addr.road));
+  else if (addr.pedestrian) parts.push('Jl. ' + capitalizeWords(addr.pedestrian));
+  if (addr.house_number) parts.push('No. ' + addr.house_number);
+  return parts.join(' ');
+}
+
+function findKecamatan(addr, jalan, displayName) {
+  // 1. Dari field subdistrict Nominatim
+  const sub = addr.suburb || addr.subdistrict || addr.city_district || '';
+  if (sub) {
+    const cleaned = sub.replace(/kecamatan\s*/i,'').trim().toLowerCase();
+    for (const k of Object.keys(KECAMATAN_DATA)) {
+      if (k.toLowerCase().includes(cleaned) || cleaned.includes(k.toLowerCase())) return k;
+    }
+  }
+
+  // 2. Cari di displayName
+  const dn = displayName.toLowerCase();
+  for (const k of Object.keys(KECAMATAN_DATA)) {
+    if (dn.includes(k.toLowerCase())) return k;
+  }
+
+  // 3. Cocokkan nama jalan
+  const j = jalan.toLowerCase();
+  for (const [key, kec] of Object.entries(JALAN_KECAMATAN)) {
+    if (j.includes(key)) return kec;
+  }
+
+  return '';
+}
+
+function capitalizeWords(str) {
+  return str.split(' ').map(w => w ? w[0].toUpperCase() + w.slice(1).toLowerCase() : '').join(' ');
+}
+
+function showStatus(type, msg) {
+  const el = document.getElementById('gmaps-status');
+  el.style.display = 'block';
+  el.className = 'gmaps-status ' + type;
+  el.textContent = msg;
+}
+</script>
+</body>
+</html>1
